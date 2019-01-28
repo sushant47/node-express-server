@@ -11,7 +11,7 @@ import * as mongoose from "mongoose";
 //     "ip_address": String,
 // };
 class App {
-    public mongoUrl: string = process.env.MONGODB_URI || 'mongodb://localhost:27017/demo';
+    public mongoUrl: string = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/demo';
     public app: express.Application;
     public routePrv: Routes = new Routes();
     constructor() {
