@@ -13,8 +13,9 @@ const mongoose = require("mongoose");
 // };
 class App {
     constructor() {
-        this.mongoUrl = 'mongodb://localhost:27017/demo';
+        this.mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/demo';
         this.routePrv = new crmRoutes_1.Routes();
+        console.log(this.mongoUrl);
         this.mongoSetup();
         this.app = express();
         this.config();
