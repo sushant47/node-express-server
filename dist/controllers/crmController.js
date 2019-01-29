@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
 const crmModel_1 = require("../models/crmModel");
-const userSchema = {
+exports.userSchema = {
     "first_name": String,
     "last_name": String,
     "email": String,
@@ -10,7 +10,7 @@ const userSchema = {
     "ip_address": String,
 };
 const Contact = mongoose.model('Contact', crmModel_1.ContactSchema);
-exports.Users = mongoose.model('users', userSchema);
+exports.Users = mongoose.model('users', exports.userSchema);
 class ContactController {
     getContacts(req, res) {
         Contact.find({}, (err, contact) => {
