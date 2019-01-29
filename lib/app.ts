@@ -46,7 +46,7 @@ class App {
     }
     private mongoSetup(): void {
         mongoose.Promise = global.Promise;
-        mongoose.connect(this.mongoUrl, function (err) {
+        mongoose.connect(process.env.MONGODB_URI, function (err) {
             if (err) {
                 console.log('Some problem with the connection ' + err)
             }
