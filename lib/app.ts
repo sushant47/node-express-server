@@ -38,7 +38,7 @@ class App {
     }
     private mongoSetup(): void {
         mongoose.Promise = global.Promise;
-        mongoose.connect('mongodb://Sushant:Susano@47@ds147734.mlab.com:47734/users');
+        mongoose.connect('mongodb://sushant:Susano@47@ds147734.mlab.com:47734/users');
     }
 }
 // export const Users = mongoose.model('users', userSchema);
