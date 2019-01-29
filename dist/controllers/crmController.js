@@ -10,7 +10,7 @@ const userSchema = {
     "ip_address": String,
 };
 const Contact = mongoose.model('Contact', crmModel_1.ContactSchema);
-const Users = mongoose.model('users', userSchema);
+exports.Users = mongoose.model('users', userSchema);
 class ContactController {
     getContacts(req, res) {
         Contact.find({}, (err, contact) => {
@@ -21,7 +21,7 @@ class ContactController {
         });
     }
     getUsers(req, res) {
-        Users.find({}, (err, contact) => {
+        exports.Users.find({}, (err, contact) => {
             if (err) {
                 res.send(err);
             }
@@ -39,11 +39,11 @@ class ContactController {
         query['skip'] = size * (pageNo - 1);
         query['limit'] = size;
         // Find some documents
-        Users.count({}, function (err, totalCount) {
+        exports.Users.count({}, function (err, totalCount) {
             if (err) {
                 res.send({ "error": true, "message": "Error fetching data" });
             }
-            Users.find({}, {}, query, function (err, data) {
+            exports.Users.find({}, {}, query, function (err, data) {
                 // Mongo command to fetch all data from collection.
                 if (err) {
                     res.send({ "error": true, "message": "Error fetching data" });

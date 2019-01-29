@@ -15,7 +15,7 @@ const cors = require("cors");
 class App {
     constructor() {
         this.local = 'mongodb://localhost:27017/demo';
-        this.mongoUrl = process.env.NODE_ENV === 'production ' ? process.env.MONGOLAB_URI : this.local;
+        this.mongoUrl = process.env.NODE_ENV === 'development' ? process.env.MONGODB_URI : this.local;
         this.routePrv = new crmRoutes_1.Routes();
         console.log('environment ', process.env.NODE_ENV);
         console.log('process ', process.env);
@@ -46,7 +46,7 @@ class App {
     }
     mongoSetup() {
         mongoose.Promise = global.Promise;
-        mongoose.connect(process.env.MONGODB_URI, function (err) {
+        mongoose.connect(this.mongoUrl, function (err) {
             if (err) {
                 console.log('Some problem with the connection ' + err);
             }
