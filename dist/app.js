@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const crmRoutes_1 = require("./routes/crmRoutes");
 const mongoose = require("mongoose");
+const cors = require("cors");
 // const userSchema = {
 //     "first_name": String,
 //     "last_name": String,
@@ -27,7 +28,15 @@ class App {
         this.mongoSetup();
         this.app = express();
         this.config();
+        this.app.use(cors());
         this.routePrv.routes(this.app);
+        // this.app.use(function(req, res, next) {
+        //     res.header('Access-Control-Allow-Credentials', true);
+        //     res.header('Access-Control-Allow-Origin', '*');
+        //     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        //     res.header('Access-Control-Allow-Headers', 'appid, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+        //     next();
+        // });
     }
     config() {
         // support application/json type post data
@@ -37,7 +46,14 @@ class App {
     }
     mongoSetup() {
         mongoose.Promise = global.Promise;
-        mongoose.connect('mongodb://sushant:Susano@47@ds147734.mlab.com:47734/users');
+        mongoose.connect(process.env.MONGODB_URI, function (err) {
+            if (err) {
+                console.log('Some problem with the connection ' + err);
+            }
+            else {
+                console.log('The Mongoose connection is ready');
+            }
+        });
     }
 }
 // export const Users = mongoose.model('users', userSchema);
