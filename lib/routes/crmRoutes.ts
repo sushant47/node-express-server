@@ -8,36 +8,9 @@ export class Routes {
     public contactsList: ContactsList = new ContactsList();
     public routes(app): void {
         app.route('/users')
-        .get(this.contactController.getUsers)
-        //     .get((req, res) => {
-        //         var pageNo = parseInt(req.query.pageNo)
-        //         var size = parseInt(req.query.size)
-        //         let query = {}
-        //         if (pageNo < 0 || pageNo === 0) {
-        //             res = { "error": true, "message": "invalid page number, should start with 1" };
-        //             return res
-        //         }
-        //         query['skip'] = size * (pageNo - 1)
-        //         query['limit'] = size
-        //         // Find some documents
-        //         Users.count({}, function (err, totalCount) {
-        //             if (err) {
-        //                 res = { "error": true, "message": "Error fetching data" }
-        //             }
-        //             Users.find({}, {}, query, function (err, data) {
-        //                 // Mongo command to fetch all data from collection.
-        //                 if (err) {
-        //                     res = { "error": true, "message": "Error fetching data" };
-        //                 } else {
-        //                     var totalPages = Math.ceil(totalCount / size)
-        //                     res = { "error": false, "message": data, "pages": totalPages };
-        //                 }
-        //                 res;
-        //             });
-        //         })
-        //     })
-app.route('/userPages')
-.get(this.contactController.getUserPages)
+            .get(this.contactController.getUsers)
+        app.route('/userPages')
+            .get(this.contactController.getUserPages)
         app.route('/')
             .get((req: Request, res: Response) => {
                 res.status(200).send({

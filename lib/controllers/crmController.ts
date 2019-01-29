@@ -10,7 +10,7 @@ const userSchema = {
     "ip_address": String,
 };
 const Contact = mongoose.model('Contact', ContactSchema);
-const Users = mongoose.model('users', userSchema);
+export const Users = mongoose.model('users', userSchema);
 export class ContactController {
     public getContacts(req: Request, res: Response) {
         Contact.find({}, (err, contact) => {

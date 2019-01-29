@@ -12,7 +12,7 @@ import * as cors from "cors";
 // };
 class App {
     public local = 'mongodb://localhost:27017/demo';
-    public mongoUrl: string = process.env.NODE_ENV === 'production ' ? process.env.MONGOLAB_URI : this.local;
+    public mongoUrl: string = process.env.NODE_ENV === 'development' ? process.env.MONGODB_URI : this.local;
     public app: express.Application;
     public routePrv: Routes = new Routes();
     constructor() {
@@ -46,7 +46,7 @@ class App {
     }
     private mongoSetup(): void {
         mongoose.Promise = global.Promise;
-        mongoose.connect(process.env.MONGODB_URI, function (err) {
+        mongoose.connect(this.mongoUrl, function (err) {
             if (err) {
                 console.log('Some problem with the connection ' + err)
             }
