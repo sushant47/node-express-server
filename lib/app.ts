@@ -2,7 +2,7 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import { Routes } from "./routes/crmRoutes";
 import * as mongoose from "mongoose";
-
+import * as cors from "cors";
 // const userSchema = {
 //     "first_name": String,
 //     "last_name": String,
@@ -27,7 +27,15 @@ class App {
         this.mongoSetup();
         this.app = express();
         this.config();
+        this.app.use(cors());
         this.routePrv.routes(this.app);
+        // this.app.use(function(req, res, next) {
+        //     res.header('Access-Control-Allow-Credentials', true);
+        //     res.header('Access-Control-Allow-Origin', '*');
+        //     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        //     res.header('Access-Control-Allow-Headers', 'appid, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+        //     next();
+        // });
     }
 
     private config(): void {
