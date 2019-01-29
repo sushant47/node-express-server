@@ -11,11 +11,19 @@ import * as mongoose from "mongoose";
 //     "ip_address": String,
 // };
 class App {
-    public mongoUrl: string = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/demo';
+    public local = 'mongodb://localhost:27017/demo';
+    public mongoUrl: string = process.env.NODE_ENV === 'production ' ? process.env.MONGOLAB_URI : this.local;
     public app: express.Application;
     public routePrv: Routes = new Routes();
     constructor() {
+        console.log('environment ', process.env.NODE_ENV);
+        console.log('process ', process.env);
+        console.log('mongoLab ', process.env.MONGOLAB_URI);
+        console.log('mongo DB ', process.env.MONGODB_URI);
         console.log(this.mongoUrl);
+        if (process.env.NODE_ENV == 'production') {
+            console.log('hi');
+        }
         this.mongoSetup();
         this.app = express();
         this.config();
@@ -30,7 +38,7 @@ class App {
     }
     private mongoSetup(): void {
         mongoose.Promise = global.Promise;
-        mongoose.connect(this.mongoUrl);
+        mongoose.connect(process.env.MONGODB_URI);
     }
 }
 // export const Users = mongoose.model('users', userSchema);

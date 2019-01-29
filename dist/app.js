@@ -13,9 +13,17 @@ const mongoose = require("mongoose");
 // };
 class App {
     constructor() {
-        this.mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/demo';
+        this.local = 'mongodb://localhost:27017/demo';
+        this.mongoUrl = process.env.NODE_ENV === 'production ' ? process.env.MONGOLAB_URI : this.local;
         this.routePrv = new crmRoutes_1.Routes();
+        console.log('environment ', process.env.NODE_ENV);
+        console.log('process ', process.env);
+        console.log('mongoLab ', process.env.MONGOLAB_URI);
+        console.log('mongo DB ', process.env.MONGODB_URI);
         console.log(this.mongoUrl);
+        if (process.env.NODE_ENV == 'production') {
+            console.log('hi');
+        }
         this.mongoSetup();
         this.app = express();
         this.config();
@@ -29,7 +37,7 @@ class App {
     }
     mongoSetup() {
         mongoose.Promise = global.Promise;
-        mongoose.connect(this.mongoUrl);
+        mongoose.connect(process.env.MONGODB_URI);
     }
 }
 // export const Users = mongoose.model('users', userSchema);
