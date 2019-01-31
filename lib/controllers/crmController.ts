@@ -8,6 +8,7 @@ export const userSchema = {
     "email": String,
     "gender": String,
     "ip_address": String,
+    "image_url": String
 };
 const Contact = mongoose.model('Contact', ContactSchema);
 export const Users = mongoose.model('users', userSchema);
